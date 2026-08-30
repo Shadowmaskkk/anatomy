@@ -814,3 +814,28 @@ button.organ-card-image:focus-visible { outline: 2px solid #8b6fc4; outline-offs
   .quiz-answer > div strong { font-size: 17px; }
   .authoring-panel { inset-inline-start: 10px; max-width: calc(100% - 20px); bottom: 82px; }
 }
+
+/* Fix for mobile compare strip overlapping viewer tools */
+@media (max-width: 470px) {
+  .app-shell:has(.compare-strip) .viewer-tools { bottom: 154px; }
+}
+
+/* Watermark styles */
+.creator-watermark {
+  position: fixed;
+  bottom: 16px;
+  right: 20px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  z-index: 100;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  pointer-events: none;
+}
+
+.creator-watermark:hover {
+  opacity: 1;
+  color: var(--lavender);
+}

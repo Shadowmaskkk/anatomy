@@ -6,6 +6,8 @@ import {
   Noto_Sans_Arabic,
   Noto_Sans_Devanagari,
   Noto_Serif_Devanagari,
+  Noto_Serif_Bengali,
+  Noto_Sans_Bengali,
 } from "next/font/google";
 import type { ScriptGroup } from "./config";
 
@@ -22,11 +24,15 @@ const devanagariSans = Noto_Sans_Devanagari({ variable: "--font-sans", subsets: 
 const arabicSerif = Noto_Naskh_Arabic({ variable: "--font-serif", subsets: ["arabic"], weight: ["400", "500", "600"] });
 const arabicSans = Noto_Sans_Arabic({ variable: "--font-sans", subsets: ["arabic"] });
 
+const bengaliSerif = Noto_Serif_Bengali({ variable: "--font-serif", subsets: ["bengali"], weight: ["400", "500", "600"] });
+const bengaliSans = Noto_Sans_Bengali({ variable: "--font-sans", subsets: ["bengali"] });
+
 const webFonts: Partial<Record<ScriptGroup, { serif: { variable: string }; sans: { variable: string } }>> = {
   latin: { serif: cormorant, sans: dmSans },
   cyrillic: { serif: cormorantCyrillic, sans: notoSansCyrillic },
   devanagari: { serif: devanagariSerif, sans: devanagariSans },
   arabic: { serif: arabicSerif, sans: arabicSans },
+  bengali: { serif: bengaliSerif, sans: bengaliSans },
 };
 
 /**
