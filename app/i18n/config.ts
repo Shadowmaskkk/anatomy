@@ -1,6 +1,6 @@
 /** Script group decides which font pair loads. Keeping this separate from the
  *  locale list means adding a Latin-script locale costs no extra font weight. */
-export type ScriptGroup = "latin" | "cyrillic" | "devanagari" | "arabic" | "sc" | "jp" | "kr";
+export type ScriptGroup = "latin" | "cyrillic" | "devanagari" | "bengali" | "arabic" | "sc" | "jp" | "kr";
 
 export type LocaleConfig = {
   code: string;
@@ -27,6 +27,7 @@ export const locales: LocaleConfig[] = [
   { code: "ru", nativeName: "Русский",  englishName: "Russian",    country: "Russia",        dir: "ltr", script: "cyrillic",   intl: "ru_RU" },
   { code: "id", nativeName: "Indonesia", englishName: "Indonesian", country: "Indonesia",    dir: "ltr", script: "latin",      intl: "id_ID" },
   { code: "ko", nativeName: "한국어",     englishName: "Korean",     country: "South Korea",   dir: "ltr", script: "kr",         intl: "ko_KR" },
+  { code: "bn", nativeName: "বাংলা",     englishName: "Bengali",     country: "Bangladesh",   dir: "ltr", script: "bengali",         intl: "bn_BD" },
 ];
 
 export const defaultLocale = "en";
