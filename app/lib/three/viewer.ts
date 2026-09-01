@@ -138,6 +138,7 @@ export class AnatomyViewer {
     canvas.addEventListener("pointermove", this.onPointerMove);
     canvas.addEventListener("pointerup", this.onPointerUp);
     canvas.addEventListener("pointerleave", this.onPointerLeave);
+    canvas.addEventListener("pointercancel", this.onPointerLeave);
     canvas.addEventListener("keydown", this.onKeyDown);
 
     this.resize();
@@ -668,7 +669,28 @@ export class AnatomyViewer {
     this.disposed = true;
     this.loadRequest += 1;
     cancelAnimationFrame(this.frame);
+
     gsap.killTweensOf(this.camera.position);
+    gsap.killTweensOf(this.controls.target);
+    gsap.killTweensOf(this.clipPlane);
+    gsap.killTweensOf(this.plinth.material);
+    gsap.killTweensOf(this.contactShadow.material);
+    if (this.organ) {
+      gsap.killTweensOf(this.organ.pivot.scale);
+      gsap.killTweensOf(this.organ.pivot.rotation);
+      gsap.killTweensOf(this.organ.pivot.position);
+      gsap.killTweensOf(this.organ.pivot);
+    }
+
+    this.plinth.geometry.dispose();
+    (this.plinth.material as THREE.Material).dispose();
+
+    const particles = this.scene.getObjectByName("particles") as THREE.Points;
+    if (particles) {
+      particles.geometry.dispose();
+      (particles.material as THREE.Material).dispose();
+    }
+
     this.controls.removeEventListener("start", this.onControlStart);
     this.controls.dispose();
     this.resizeObserver.disconnect();
@@ -680,6 +702,7 @@ export class AnatomyViewer {
     canvas.removeEventListener("pointermove", this.onPointerMove);
     canvas.removeEventListener("pointerup", this.onPointerUp);
     canvas.removeEventListener("pointerleave", this.onPointerLeave);
+    canvas.removeEventListener("pointercancel", this.onPointerLeave);
     canvas.removeEventListener("keydown", this.onKeyDown);
 
     this.hotspots.dispose();
