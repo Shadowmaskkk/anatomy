@@ -292,11 +292,11 @@ export function OrganViewer({ organ, t, autoRotate, onAutoRotate, compare, onCom
   ];
 
   return (
-    <section className="viewer-shell" aria-label={format(t.viewer.title, { organ: organ.name })}>
+    <section className="viewer-shell" role="region" aria-label={format(t.viewer.title, { organ: organ.name })}>
       <div className="viewer-glow" style={{ "--organ-accent": organ.accent } as React.CSSProperties} />
       <div ref={mountRef} className="three-mount" />
 
-      <div className="viewer-tools" aria-label={t.tools.label}>
+      <div className="viewer-tools" role="toolbar" aria-label={t.tools.label}>
         {tools.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
@@ -313,7 +313,7 @@ export function OrganViewer({ organ, t, autoRotate, onAutoRotate, compare, onCom
       </div>
 
       {!quizActive && (
-      <aside className="tip-note" aria-label={t.viewer.tip}>
+      <aside className="tip-note" role="complementary" aria-label={t.viewer.tip}>
         <span><Sparkles size={15} /> {t.viewer.tip}</span>
         <p>{t.viewer.tipDrag}<br />{t.viewer.tipScroll}<br />{t.viewer.tipClick}</p>
       </aside>
@@ -332,7 +332,7 @@ export function OrganViewer({ organ, t, autoRotate, onAutoRotate, compare, onCom
       )}
 
       {/* Screen-reader equivalent of the dots, which live in the canvas. */}
-      <ul className="hotspot-index" aria-label={t.viewer.structures}>
+      <ul className="hotspot-index" role="list" aria-label={t.viewer.structures}>
         {organ.hotspots.map((hotspot) => (
           <li key={hotspot.id}>{hotspot.label}: {hotspot.detail}</li>
         ))}
