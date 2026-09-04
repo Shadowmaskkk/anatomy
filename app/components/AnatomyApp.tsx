@@ -63,8 +63,8 @@ function OrganArt({
       key={`${organ.id}-${asset}`}
       src={`/anatomy/${organ.id}/${asset}.webp`}
       alt={alt}
-      width={size}
-      height={size}
+      width={size || 512}
+      height={size || 512}
       loading={asset === "thumb" ? "eager" : "lazy"}
       decoding="async"
     />
@@ -173,23 +173,23 @@ export function AnatomyApp({ locale, dictionary }: { locale: LocaleConfig; dicti
     <main className="app-shell">
       <div className="creator-watermark">Created-By Ashim Das</div>
       <header className="topbar">
-        <button className="brand" type="button" onClick={() => selectOrgan("heart")} aria-label={t.brand.home}>
+        <a href="#" className="brand button-like" onClick={(e) => { e.preventDefault(); selectOrgan("heart"); }} aria-label={`Anatomy Atelier - ${t.brand.home}`}>
           <strong>Anatomy Atelier<sup>✦</sup></strong>
           <em>{t.brand.tagline}</em>
-        </button>
+        </a>
         <nav className="main-nav" aria-label="Primary navigation">
-          <button className="active"><Compass size={17} /> {t.nav.explore}</button>
-          <button><BrainCircuit size={17} /> {t.nav.systems}</button>
-          <button onClick={() => setModal("lesson")}><BookOpen size={17} /> {t.nav.lessons}</button>
-          <button><LibraryBig size={17} /> {t.nav.library}</button>
-          <button><NotebookPen size={17} /> {t.nav.notes}</button>
+          <a href="#" className="active button-like" onClick={(e) => e.preventDefault()}><Compass size={17} /> {t.nav.explore}</a>
+          <a href="#" className="button-like" onClick={(e) => e.preventDefault()}><BrainCircuit size={17} /> {t.nav.systems}</a>
+          <a href="#" className="button-like" onClick={(e) => { e.preventDefault(); setModal("lesson"); }}><BookOpen size={17} /> {t.nav.lessons}</a>
+          <a href="#" className="button-like" onClick={(e) => e.preventDefault()}><LibraryBig size={17} /> {t.nav.library}</a>
+          <a href="#" className="button-like" onClick={(e) => e.preventDefault()}><NotebookPen size={17} /> {t.nav.notes}</a>
         </nav>
         <label className="search-box">
           <Search size={17} />
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder={t.search.placeholder} />
         </label>
         <LanguageSwitcher locale={locale} t={t} />
-        <button className="profile" aria-label={t.profile.open}><span>MA</span><ChevronDown size={15} /></button>
+        <button className="profile" aria-label={`MA ${t.profile.open}`}><span>MA</span><ChevronDown size={15} /></button>
         <button className="mobile-library-trigger" onClick={() => setMobileLibrary(true)} aria-label={t.library.open}><LibraryBig size={20} /></button>
       </header>
 
@@ -269,7 +269,7 @@ export function AnatomyApp({ locale, dictionary }: { locale: LocaleConfig; dicti
       </div>
 
       {compare && (
-        <section className="compare-strip" aria-label={t.compare.title}>
+        <section className="compare-strip" role="region" aria-label={t.compare.title}>
           <div className="compare-organ"><OrganArt organ={organ} asset="thumb" alt="" /><span>{t.compare.comparing}</span><strong>{organ.name}</strong><small>{organ.system}</small></div>
           <b>{t.compare.vs}</b>
           <div className="compare-organ"><OrganArt organ={reference} asset="thumb" alt="" /><span>{t.compare.reference}</span><strong>{reference.name}</strong><small>{reference.system}</small></div>
@@ -278,8 +278,9 @@ export function AnatomyApp({ locale, dictionary }: { locale: LocaleConfig; dicti
         </section>
       )}
 
-      <section className="learning-cards" aria-label={format(t.cards.resources, { organ: organ.name })}>
+      <section className="learning-cards" role="region" aria-label={format(t.cards.resources, { organ: organ.name })}>
         <article className="curiosity-card">
+          <h2 className="sr-only">{t.library.quoteSign}</h2>
           <span>✿</span><p>{t.library.quoteLine1}<br />{t.library.quoteLine2}</p><em>{t.library.quoteSign}</em>
         </article>
         <article>
