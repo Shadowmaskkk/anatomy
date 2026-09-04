@@ -171,7 +171,7 @@ export function AnatomyApp({ locale, dictionary }: { locale: LocaleConfig; dicti
 
   return (
     <main className="app-shell">
-      <div className="creator-watermark">Created-By Ashim Das</div>
+      <div className="creator-watermark">Created-By Ashim and The Bugged Dev</div>
       <header className="topbar">
         <button className="brand" type="button" onClick={() => selectOrgan("heart")} aria-label={t.brand.home}>
           <strong>Anatomy Atelier<sup>✦</sup></strong>
